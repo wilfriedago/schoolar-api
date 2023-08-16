@@ -1,0 +1,114 @@
+server:
+  address: ${APP_HOST:localhost}
+  port: ${APP_PORT:8080}
+  compression:
+    enabled: true
+  servlet:
+    session:
+      cookie:
+        path: /
+        name: ${COOKIE_NAME:schoolar}
+        domain: ${COOKIE_DOMAIN:localhost}
+        secure: true
+        max-age: 86400
+        http-only: true
+        same-site: strict
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    web: debug
+    root: info
+    org:
+      springframework:
+        security: error
+  file:
+    name: ${LOG_FILENAME:logs/api.log}
+
+spring:
+  application:
+    name: ${APP_NAME:schoolar}
+  devtools:
+    livereload:
+      enabled: true
+      port: 8082
+    add-properties: false
+    restart:
+      enabled: true
+      additional-exclude: static/**
+      additional-paths: src/main/java
+
+  # Datasource properties
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:schoolar}
+    username: ${DB_USERNAME:schoolar}
+    password: ${DB_PASSWORD:schoolar}
+    driver-class-name: org.postgresql.Driver
+
+  # Flyway properties
+  flyway:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:schoolar}
+    user: ${DB_USERNAME:schoolar}
+    password: ${DB_PASSWORD:schoolar}
+    default-schema: ${DB_SCHEMA:v1}
+    enabled: false
+    baseline-version: 1
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+  # Hibernate properties
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${DB_SHOW_SQL:false}
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: ${DB_SCHEMA:v1}
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+  output:
+    ansi:
+      enabled: always
+
+  web:
+    locale: en
+
+  messages:
+    encoding: UTF-8
+    fallback-to-system-locale: false
+
+springdoc:
+  swagger-ui:
+    filter: true
+    enabled: true
+    with-credentials: true
+    try-it-out-enabled: true
+  api-docs:
+    enabled: true
+    version: openapi_3_0
+
+jwt:
+  secret: ${JWT_SECRET:secret}
+  expiration-in-hours: ${JWT_EXPIRATION_IN_HOURS:1}
+  refresh-expiration-in-days: ${JWT_REFRESH_EXPIRATION_IN_DAYS:1}
+
+swagger:
+  app-name: Schoolar API
+  app-description: Schoolar API documentation
+  app-version: 1.0.0
+  app-license: Apache 2.0
+  app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact-name: Wilfried AGO
+  contact-mail: wilfriedago@pm.me
+  contact-url: https://github.com/wilfriedago
+  dev-url: ${SWAGGER_DEV_URL:http://localhost:8080}
+  prod-url: ${SWAGGER_PROD_URL:https://schoolar.render.com}
+  dev-description: ${SWAGGER_DEV_DESCRIPTION:Development server}
+  prod-description: ${SWAGGER_DEV_DESCRIPTION:Production server}
+  username: ${SWAGGER_USERNAME:schoolar}
+  password: ${SWAGGER_USERNAME:schoolar}
