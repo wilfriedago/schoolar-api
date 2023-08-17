@@ -6,6 +6,7 @@ import dev.thewlabs.schoolar.shared.exceptions.EmailNotFoundException;
 import dev.thewlabs.schoolar.shared.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -24,6 +25,7 @@ public class AuthService {
         return null;
     }
 
+    @Transactional
     public Account createAccount(String email) {
         String password = PasswordUtils.generate();
 

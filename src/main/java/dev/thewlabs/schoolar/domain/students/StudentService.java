@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,6 +48,7 @@ public class StudentService implements CrudService<StudentDetailsDTO, CreateStud
     }
 
     @Override
+    @Transactional
     public StudentDetailsDTO create(@NotNull CreateStudentDTO dto) {
         Account account = authService.createAccount(dto.email());
 
