@@ -1,7 +1,7 @@
 package dev.thewlabs.schoolar.domain.teachers.dtos;
 
-import dev.thewlabs.schoolar.shared.validators.EmailUnique;
 import dev.thewlabs.schoolar.domain.courses.validators.CourseExist;
+import dev.thewlabs.schoolar.shared.validators.EmailUnique;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -6,10 +6,14 @@ import dev.thewlabs.schoolar.domain.groups.Group;
 import dev.thewlabs.schoolar.domain.sessions.Session;
 import dev.thewlabs.schoolar.domain.subjects.Subject;
 import dev.thewlabs.schoolar.domain.teachers.Teacher;
+import dev.thewlabs.schoolar.domain.users.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Check;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,4 +63,15 @@ public class Course extends Traceable {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "courses")
     private List<Assessment> assessments;
+
+    public @NotNull List<User> getAttendees() {
+        List<? extends User> courseStudents = this.group.getStudents();
+        List<? extends User> courseTeachers = this.teachers;
+
+        List<User> attendees = new ArrayList<>();
+        attendees.addAll(courseStudents);
+        attendees.addAll(courseTeachers);
+
+        return attendees;
+    }
 }

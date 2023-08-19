@@ -1,6 +1,6 @@
 package dev.thewlabs.schoolar.domain.events;
 
-import dev.thewlabs.schoolar.domain.events.dtos.EventDetailsDTO;
+import dev.thewlabs.schoolar.domain.events.dtos.EventDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +19,7 @@ public class EventService {
         this.repository = repository;
     }
 
-    public Page<EventDetailsDTO> findAll(int page, int size, Sort sort) {
+    public Page<EventDetailsDto> findAll(int page, int size, Sort sort) {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         return repository.findAll(pageable).map(mapper::entityToDto);

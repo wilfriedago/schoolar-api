@@ -1,14 +1,14 @@
 package dev.thewlabs.schoolar.domain.courses;
 
-import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import dev.thewlabs.schoolar.core.interfaces.CrudService;
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDTO;
-import dev.thewlabs.schoolar.domain.courses.dtos.CreateCourseDTO;
-import dev.thewlabs.schoolar.domain.courses.dtos.UpdateCourseDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
+import dev.thewlabs.schoolar.domain.courses.dtos.CreateCourseDto;
+import dev.thewlabs.schoolar.domain.courses.dtos.UpdateCourseDto;
 import dev.thewlabs.schoolar.domain.groups.Group;
 import dev.thewlabs.schoolar.domain.groups.GroupRepository;
 import dev.thewlabs.schoolar.domain.subjects.Subject;
 import dev.thewlabs.schoolar.domain.subjects.SubjectRepository;
+import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CourseService implements CrudService<CourseDetailsDTO, CreateCourseDTO, UpdateCourseDTO> {
+public class CourseService implements CrudService<CourseDetailsDto, CreateCourseDto, UpdateCourseDto> {
     private final CourseMapper mapper;
     private final CourseRepository repository;
     private final GroupRepository groupRepository;
@@ -41,7 +41,7 @@ public class CourseService implements CrudService<CourseDetailsDTO, CreateCourse
     }
 
     @Override
-    public Page<CourseDetailsDTO> findAll(int page, int size, Sort sort) {
+    public Page<CourseDetailsDto> findAll(int page, int size, Sort sort) {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<Course> courses = repository.findAll(pageable);
@@ -50,14 +50,14 @@ public class CourseService implements CrudService<CourseDetailsDTO, CreateCourse
     }
 
     @Override
-    public CourseDetailsDTO findById(@NotNull UUID id) throws NotFoundException {
+    public CourseDetailsDto findById(@NotNull UUID id) throws NotFoundException {
         Course course = repository.findCourseById(id);
 
         return mapper.entityToDto(course);
     }
 
     @Override
-    public CourseDetailsDTO create(@NotNull CreateCourseDTO dto) throws NotFoundException {
+    public CourseDetailsDto create(@NotNull CreateCourseDto dto) throws NotFoundException {
         Course course = mapper.dtoToEntity(dto);
         Group group = groupRepository.findGroupById(UUID.fromString(dto.groupId()));
         Subject subject = subjectRepository.findSubjectById(UUID.fromString(dto.subjectId()));
@@ -71,7 +71,7 @@ public class CourseService implements CrudService<CourseDetailsDTO, CreateCourse
     }
 
     @Override
-    public CourseDetailsDTO update(@NotNull UUID id, @NotNull UpdateCourseDTO dto) throws NotFoundException {
+    public CourseDetailsDto update(@NotNull UUID id, @NotNull UpdateCourseDto dto) throws NotFoundException {
         Course course = this.repository.findCourseById(id);
 
         mapper.updateEntityFromDto(dto, course);
@@ -88,7 +88,7 @@ public class CourseService implements CrudService<CourseDetailsDTO, CreateCourse
         repository.delete(course);
     }
 
-    public Page<CourseDetailsDTO> findAllByGroup(Group group, Pageable pageable) {
+    public Page<CourseDetailsDto> findAllByGroup(Group group, Pageable pageable) {
         return repository.findAllByGroup(group, pageable).map(mapper::entityToDto);
     }
 

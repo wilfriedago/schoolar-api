@@ -1,6 +1,6 @@
-package dev.thewlabs.schoolar.domain.courses.validators;
+package dev.thewlabs.schoolar.domain.classrooms.validators;
 
-import dev.thewlabs.schoolar.domain.courses.CourseRepository;
+import dev.thewlabs.schoolar.domain.classrooms.ClassroomRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,16 @@ import java.util.UUID;
 import static java.util.Objects.isNull;
 
 @Component
-public class CourseExistValidator implements ConstraintValidator<CourseExist, String> {
-    private final CourseRepository courseRepository;
+public class ClassroomValidator implements ConstraintValidator<ClassroomExist, String> {
+    private final ClassroomRepository classroomRepository;
 
     @Autowired
-    public CourseExistValidator(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public ClassroomValidator(ClassroomRepository classroomRepository) {
+        this.classroomRepository = classroomRepository;
     }
 
     @Override
-    public void initialize(CourseExist constraintAnnotation) {
+    public void initialize(ClassroomExist constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -29,8 +29,8 @@ public class CourseExistValidator implements ConstraintValidator<CourseExist, St
         if (isNull(id)) return true;// Let other validators handle null value
 
         try {
-            UUID courseId = UUID.fromString(id);
-            return courseRepository.existsById(courseId);
+            UUID classroomId = UUID.fromString(id);
+            return this.classroomRepository.existsById(classroomId);
         } catch (IllegalArgumentException exception) {
             return true; // Let other validators handle uuid validation
         }

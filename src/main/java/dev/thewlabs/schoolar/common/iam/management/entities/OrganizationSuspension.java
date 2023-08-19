@@ -1,8 +1,8 @@
 package dev.thewlabs.schoolar.common.iam.management.entities;
 
+import dev.thewlabs.schoolar.core.abstracts.ExpireableAndTraceable;
 import dev.thewlabs.schoolar.core.enums.SuspensionReason;
 import dev.thewlabs.schoolar.core.enums.SuspensionStatus;
-import dev.thewlabs.schoolar.core.abstracts.ExpireableAndTraceable;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package dev.thewlabs.schoolar.domain.courses;
 
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDTO;
-import dev.thewlabs.schoolar.domain.courses.dtos.CreateCourseDTO;
-import dev.thewlabs.schoolar.domain.courses.dtos.UpdateCourseDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
+import dev.thewlabs.schoolar.domain.courses.dtos.CreateCourseDto;
+import dev.thewlabs.schoolar.domain.courses.dtos.UpdateCourseDto;
 import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/courses")
 @Tag(name = "Courses", description = "Courses endpoints")
-public class CourseController implements CrudController<CourseDetailsDTO, CreateCourseDTO, UpdateCourseDTO> {
+public class CourseController implements CrudController<CourseDetailsDto, CreateCourseDto, UpdateCourseDto> {
     private final CourseService service;
 
     @Autowired
@@ -31,7 +31,7 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     @Override
     @GetMapping
     @Operation(summary = "List all courses")
-    public ResponseEntity<Page<CourseDetailsDTO>> list(
+    public ResponseEntity<Page<CourseDetailsDto>> list(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -39,7 +39,7 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     ) {
         Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        Page<CourseDetailsDTO> courses = this.service.findAll(page, size, sort);
+        Page<CourseDetailsDto> courses = this.service.findAll(page, size, sort);
 
         return HttpResponse.ok(courses);
     }
@@ -47,8 +47,8 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Show a course info")
-    public ResponseEntity<CourseDetailsDTO> show(@PathVariable UUID id) {
-        CourseDetailsDTO course = this.service.findById(id);
+    public ResponseEntity<CourseDetailsDto> show(@PathVariable UUID id) {
+        CourseDetailsDto course = this.service.findById(id);
 
         return HttpResponse.ok(course);
     }
@@ -56,8 +56,8 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     @Override
     @PostMapping
     @Operation(summary = "Create a new course")
-    public ResponseEntity<CourseDetailsDTO> create(@RequestBody @Validated CreateCourseDTO dto) {
-        CourseDetailsDTO course = this.service.create(dto);
+    public ResponseEntity<CourseDetailsDto> create(@RequestBody @Validated CreateCourseDto dto) {
+        CourseDetailsDto course = this.service.create(dto);
 
         return HttpResponse.created(course);
     }
@@ -65,8 +65,8 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     @Override
     @PutMapping("/{id}")
     @Operation(summary = "Update a course")
-    public ResponseEntity<CourseDetailsDTO> update(@PathVariable UUID id, @RequestBody @Validated UpdateCourseDTO dto) {
-        CourseDetailsDTO course = this.service.update(id, dto);
+    public ResponseEntity<CourseDetailsDto> update(@PathVariable UUID id, @RequestBody @Validated UpdateCourseDto dto) {
+        CourseDetailsDto course = this.service.update(id, dto);
 
         return HttpResponse.ok(course);
     }

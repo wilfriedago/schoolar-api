@@ -1,11 +1,11 @@
 package dev.thewlabs.schoolar.domain.classrooms;
 
-import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
-import dev.thewlabs.schoolar.shared.exceptions.UnprocessableEntityException;
 import dev.thewlabs.schoolar.core.interfaces.CrudService;
 import dev.thewlabs.schoolar.domain.classrooms.dtos.ClassroomDetailsDTO;
 import dev.thewlabs.schoolar.domain.classrooms.dtos.CreateClassroomDTO;
 import dev.thewlabs.schoolar.domain.classrooms.dtos.UpdateClassroomDTO;
+import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
+import dev.thewlabs.schoolar.shared.exceptions.UnprocessableEntityException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,7 +34,7 @@ public class ClassroomService implements CrudService<ClassroomDetailsDTO, Create
     }
 
     public ClassroomDetailsDTO findById(@NotNull UUID id) throws NotFoundException {
-        Classroom classroom = repository.findByClassroomId(id);
+        Classroom classroom = repository.findClassroomById(id);
 
         return mapper.entityToDto(classroom);
     }
@@ -51,7 +51,7 @@ public class ClassroomService implements CrudService<ClassroomDetailsDTO, Create
     }
 
     public ClassroomDetailsDTO update(@NotNull UUID id, @NotNull UpdateClassroomDTO dto) throws NotFoundException {
-        Classroom classroom = repository.findByClassroomId(id);
+        Classroom classroom = repository.findClassroomById(id);
 
         mapper.updateEntityFromDto(dto, classroom);
 
@@ -61,7 +61,7 @@ public class ClassroomService implements CrudService<ClassroomDetailsDTO, Create
     }
 
     public void delete(@NotNull UUID id) throws NotFoundException {
-        Classroom classroom = repository.findByClassroomId(id);
+        Classroom classroom = repository.findClassroomById(id);
 
         repository.delete(classroom);
     }

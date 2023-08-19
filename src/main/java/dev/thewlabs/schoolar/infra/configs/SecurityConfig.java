@@ -1,8 +1,8 @@
 package dev.thewlabs.schoolar.infra.configs;
 
 import dev.thewlabs.schoolar.common.iam.authentication.middlewares.AuthMiddleware;
-import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import dev.thewlabs.schoolar.infra.environments.ApplicationEnvironment;
+import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

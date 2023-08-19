@@ -1,12 +1,10 @@
 package dev.thewlabs.schoolar.domain.groups;
 
-import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
-import dev.thewlabs.schoolar.shared.exceptions.UnprocessableEntityException;
 import dev.thewlabs.schoolar.core.interfaces.CrudService;
 import dev.thewlabs.schoolar.core.records.BulkActionResultDto;
 import dev.thewlabs.schoolar.domain.courses.Course;
 import dev.thewlabs.schoolar.domain.courses.CourseService;
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
 import dev.thewlabs.schoolar.domain.groups.dtos.CreateGroupDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.GroupDetailsDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.UpdateGroupDTO;
@@ -17,6 +15,8 @@ import dev.thewlabs.schoolar.domain.groups.dtos.students.RemoveStudentsDTO;
 import dev.thewlabs.schoolar.domain.students.Student;
 import dev.thewlabs.schoolar.domain.students.StudentService;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDetailsDTO;
+import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
+import dev.thewlabs.schoolar.shared.exceptions.UnprocessableEntityException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -118,7 +118,7 @@ public class GroupService implements CrudService<GroupDetailsDTO, CreateGroupDTO
         return BulkActionResultDto.getResult(dto.studentIds().size(), studentsToRemove.size());
     }
 
-    public Page<CourseDetailsDTO> findCourses(@NotNull UUID id, int page, int size, Sort sort) {
+    public Page<CourseDetailsDto> findCourses(@NotNull UUID id, int page, int size, Sort sort) {
         Group group = repository.findGroupById(id);
         Pageable pageable = PageRequest.of(page, size, sort);
 

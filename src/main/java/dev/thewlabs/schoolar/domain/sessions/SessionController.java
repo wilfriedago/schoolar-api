@@ -1,9 +1,9 @@
 package dev.thewlabs.schoolar.domain.sessions;
 
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
-import dev.thewlabs.schoolar.domain.sessions.dtos.CreateSessionDTO;
-import dev.thewlabs.schoolar.domain.sessions.dtos.SessionDetailsDTO;
-import dev.thewlabs.schoolar.domain.sessions.dtos.UpdateSessionDTO;
+import dev.thewlabs.schoolar.domain.sessions.dtos.CreateSessionDto;
+import dev.thewlabs.schoolar.domain.sessions.dtos.SessionDetailsDto;
+import dev.thewlabs.schoolar.domain.sessions.dtos.UpdateSessionDto;
 import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/sessions")
 @Tag(name = "Sessions", description = "Sessions endpoints")
-public class SessionController implements CrudController<SessionDetailsDTO, CreateSessionDTO, UpdateSessionDTO> {
+public class SessionController implements CrudController<SessionDetailsDto, CreateSessionDto, UpdateSessionDto> {
     private final SessionService service;
 
     @Autowired
@@ -30,7 +30,7 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
     @Override
     @GetMapping
     @Operation(summary = "List all sessions")
-    public ResponseEntity<Page<SessionDetailsDTO>> list(
+    public ResponseEntity<Page<SessionDetailsDto>> list(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -38,7 +38,7 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
     ) {
         Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        Page<SessionDetailsDTO> sessions = this.service.findAll(page, size, sort);
+        Page<SessionDetailsDto> sessions = this.service.findAll(page, size, sort);
 
         return HttpResponse.ok(sessions);
     }
@@ -46,13 +46,13 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Show a session info")
-    public ResponseEntity<SessionDetailsDTO> show(
+    public ResponseEntity<SessionDetailsDto> show(
             @UUID
             @Validated
             @PathVariable
             java.util.UUID id
     ) {
-        SessionDetailsDTO session = this.service.findById(id);
+        SessionDetailsDto session = this.service.findById(id);
 
         return HttpResponse.ok(session);
     }
@@ -60,8 +60,8 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
     @Override
     @PostMapping
     @Operation(summary = "Create a new session")
-    public ResponseEntity<SessionDetailsDTO> create(@RequestBody @Validated CreateSessionDTO createDto) {
-        SessionDetailsDTO session = this.service.create(createDto);
+    public ResponseEntity<SessionDetailsDto> create(@RequestBody @Validated CreateSessionDto createDto) {
+        SessionDetailsDto session = this.service.create(createDto);
 
         return HttpResponse.created(session);
     }
@@ -69,7 +69,7 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
     @Override
     @PutMapping("/{id}")
     @Operation(summary = "Update session data")
-    public ResponseEntity<SessionDetailsDTO> update(
+    public ResponseEntity<SessionDetailsDto> update(
             @UUID
             @Validated
             @PathVariable
@@ -77,9 +77,9 @@ public class SessionController implements CrudController<SessionDetailsDTO, Crea
 
             @RequestBody
             @Validated
-            UpdateSessionDTO updateDto
+            UpdateSessionDto updateDto
     ) {
-        SessionDetailsDTO session = this.service.update(id, updateDto);
+        SessionDetailsDto session = this.service.update(id, updateDto);
 
         return HttpResponse.ok(session);
     }

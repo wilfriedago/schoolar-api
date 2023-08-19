@@ -1,6 +1,6 @@
 package dev.thewlabs.schoolar.domain.groups.dtos;
 
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDto;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDTO;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,8 +26,8 @@ public class GroupDetailsDTO {
     @Schema(example = "Wonderful group located in Cotonou")
     String description;
 
-    @ArraySchema(contains = @Schema(implementation = CourseDTO.class))
-    List<CourseDTO> courses;
+    @ArraySchema(contains = @Schema(implementation = CourseDto.class))
+    List<CourseDto> courses;
 
     @ArraySchema(contains = @Schema(implementation = StudentDTO.class))
     List<StudentDTO> students;

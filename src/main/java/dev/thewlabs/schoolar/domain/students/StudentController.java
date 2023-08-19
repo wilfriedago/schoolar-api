@@ -1,10 +1,10 @@
 package dev.thewlabs.schoolar.domain.students;
 
-import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
 import dev.thewlabs.schoolar.domain.students.dtos.CreateStudentDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDetailsDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.UpdateStudentDTO;
+import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.hibernate.validator.constraints.UUID;

@@ -1,7 +1,7 @@
 package dev.thewlabs.schoolar.domain.subjects;
 
-import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import dev.thewlabs.schoolar.core.interfaces.CrudRepository;
+import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

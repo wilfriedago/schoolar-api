@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Documented
-@Constraint(validatedBy = {GroupExistValidator.class})
+@Constraint(validatedBy = {GroupValidator.class})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface GroupExist {
     String message() default "The group id provided is invalid.";

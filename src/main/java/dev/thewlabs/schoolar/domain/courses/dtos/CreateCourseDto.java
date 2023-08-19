@@ -1,6 +1,7 @@
 package dev.thewlabs.schoolar.domain.courses.dtos;
 
 import dev.thewlabs.schoolar.domain.groups.validators.GroupExist;
+import dev.thewlabs.schoolar.domain.subjects.validators.SubjectExist;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +9,7 @@ import org.hibernate.validator.constraints.UUID;
 import org.springframework.validation.annotation.Validated;
 
 @Schema(name = "CreateCourse", description = "Create course request payload")
-public record CreateCourseDTO(
+public record CreateCourseDto(
         @Schema(example = "Mathematics Course")
         @NotBlank(message = "Course name cannot be blank.")
         String name,
@@ -24,6 +25,7 @@ public record CreateCourseDTO(
         @Schema(example = "subject_id_here")
         @NotBlank(message = "Course subject id cannot be blank.")
         @UUID(message = "Course subject should be a valid UUID.")
+        @SubjectExist
         String subjectId,
 
         @Schema(example = "group_id_here")

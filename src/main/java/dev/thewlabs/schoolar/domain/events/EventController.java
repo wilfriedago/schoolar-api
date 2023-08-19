@@ -1,6 +1,6 @@
 package dev.thewlabs.schoolar.domain.events;
 
-import dev.thewlabs.schoolar.domain.events.dtos.EventDetailsDTO;
+import dev.thewlabs.schoolar.domain.events.dtos.EventDetailsDto;
 import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +26,7 @@ public class EventController {
 
     @GetMapping
     @Operation(summary = "List all events")
-    public ResponseEntity<Page<EventDetailsDTO>> list(
+    public ResponseEntity<Page<EventDetailsDto>> list(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -34,7 +34,7 @@ public class EventController {
     ) {
         Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        Page<EventDetailsDTO> events = this.service.findAll(page, size, sort);
+        Page<EventDetailsDto> events = this.service.findAll(page, size, sort);
 
         return HttpResponse.ok(events);
     }

@@ -1,11 +1,13 @@
 package dev.thewlabs.schoolar.domain.courses.dtos;
 
+import dev.thewlabs.schoolar.domain.groups.validators.GroupExist;
+import dev.thewlabs.schoolar.domain.subjects.validators.SubjectExist;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import org.hibernate.validator.constraints.UUID;
 
 @Schema(name = "UpdateCourse", description = "Update course request payload")
-public record UpdateCourseDTO(
+public record UpdateCourseDto(
         @Schema(example = "Mathematics Course")
         String name,
         @Schema(example = "Updated description of the course")
@@ -15,9 +17,11 @@ public record UpdateCourseDTO(
         Integer hours,
         @Schema(example = "subject_id_here")
         @UUID(message = "Course subject should be a valid UUID")
+        @SubjectExist
         String subjectId,
         @Schema(example = "group_id_here")
         @UUID(message = "Course subject should be a valid UUID")
+        @GroupExist
         String groupId
 ) {
 }

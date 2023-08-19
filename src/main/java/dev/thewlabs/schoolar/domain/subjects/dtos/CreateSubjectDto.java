@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 
 @Schema(name = "CreateSubjectDto", description = "Create subject data transfer object")
-public record CreateSubjectDTO(
+public record CreateSubjectDto(
         @Schema(example = "Mathematics")
         @NotEmpty(message = "Subject name cannot be empty")
         String name,

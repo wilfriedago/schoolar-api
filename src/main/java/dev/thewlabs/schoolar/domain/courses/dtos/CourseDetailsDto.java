@@ -2,8 +2,8 @@ package dev.thewlabs.schoolar.domain.courses.dtos;
 
 import dev.thewlabs.schoolar.domain.assessments.dtos.AssessmentDto;
 import dev.thewlabs.schoolar.domain.groups.dtos.GroupDTO;
-import dev.thewlabs.schoolar.domain.sessions.dtos.SessionDTO;
-import dev.thewlabs.schoolar.domain.subjects.dtos.SubjectDTO;
+import dev.thewlabs.schoolar.domain.sessions.dtos.SessionDto;
+import dev.thewlabs.schoolar.domain.subjects.dtos.SubjectDto;
 import dev.thewlabs.schoolar.domain.teachers.dtos.TeacherDTO;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "CourseDetailsDto", description = "Course details data transfer object")
-public class CourseDetailsDTO {
+public class CourseDetailsDto {
     @Schema(example = "9a7c1b9e-1b1a-4b0e-8b0a-9b0c1d9e1f2a")
     UUID id;
 
@@ -32,14 +32,14 @@ public class CourseDetailsDTO {
     @Schema(example = "30")
     Integer hours;
 
-    @Schema(implementation = SubjectDTO.class)
-    SubjectDTO subject;
+    @Schema(implementation = SubjectDto.class)
+    SubjectDto subject;
 
     @Schema(implementation = GroupDTO.class)
     GroupDTO group;
 
-    @ArraySchema(schema = @Schema(implementation = SessionDTO.class))
-    List<SessionDTO> sessions;
+    @ArraySchema(schema = @Schema(implementation = SessionDto.class))
+    List<SessionDto> sessions;
 
     @ArraySchema(contains = @Schema(implementation = TeacherDTO.class))
     List<TeacherDTO> teachers;

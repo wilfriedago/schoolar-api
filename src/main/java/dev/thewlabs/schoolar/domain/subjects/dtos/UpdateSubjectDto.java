@@ -3,7 +3,7 @@ package dev.thewlabs.schoolar.domain.subjects.dtos;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "UpdateSubjectDto", description = "Update subject data transfer object.")
-public record UpdateSubjectDTO(
+public record UpdateSubjectDto(
         @Schema(example = "Mathematics")
         String name,
 

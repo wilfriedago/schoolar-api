@@ -1,6 +1,5 @@
 package dev.thewlabs.schoolar.domain.courses.validators;
 
-import dev.thewlabs.schoolar.domain.courses.validators.CourseExistValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -9,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Documented
-@Constraint(validatedBy = {CourseExistValidator.class})
+@Constraint(validatedBy = {CourseValidator.class})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CourseExist {
     String message() default "The course id provided is invalid.";

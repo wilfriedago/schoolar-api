@@ -4,6 +4,7 @@ import dev.thewlabs.schoolar.shared.utils.RandomUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping
+@EnableScheduling
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {

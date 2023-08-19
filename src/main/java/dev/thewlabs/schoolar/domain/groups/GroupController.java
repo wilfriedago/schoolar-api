@@ -1,9 +1,8 @@
 package dev.thewlabs.schoolar.domain.groups;
 
-import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
 import dev.thewlabs.schoolar.core.records.BulkActionResultDto;
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
 import dev.thewlabs.schoolar.domain.groups.dtos.CreateGroupDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.GroupDetailsDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.UpdateGroupDTO;
@@ -12,6 +11,7 @@ import dev.thewlabs.schoolar.domain.groups.dtos.courses.RemoveCoursesDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.students.AddStudentsDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.students.RemoveStudentsDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDetailsDTO;
+import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +115,7 @@ public class GroupController implements CrudController<GroupDetailsDTO, CreateGr
 
     @GetMapping("/{id}/courses")
     @Operation(summary = "List all courses of a group")
-    public ResponseEntity<Page<CourseDetailsDTO>> listCourses(
+    public ResponseEntity<Page<CourseDetailsDto>> listCourses(
             @PathVariable UUID id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -124,7 +124,7 @@ public class GroupController implements CrudController<GroupDetailsDTO, CreateGr
     ) {
         Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        Page<CourseDetailsDTO> courses = this.service.findCourses(id, page, size, sort);
+        Page<CourseDetailsDto> courses = this.service.findCourses(id, page, size, sort);
 
         return HttpResponse.ok(courses);
     }

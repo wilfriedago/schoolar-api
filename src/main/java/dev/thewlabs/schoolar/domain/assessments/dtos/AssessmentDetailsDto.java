@@ -1,7 +1,7 @@
 package dev.thewlabs.schoolar.domain.assessments.dtos;
 
 import dev.thewlabs.schoolar.domain.classrooms.dtos.ClassroomDTO;
-import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDTO;
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public record AssessmentDetailsDto(
         ClassroomDTO classroom,
         @Schema(description = "The status of the assessment.", example = "CANCELLED")
         String status,
-        @Schema(description = "The courses associated with the assessment.", implementation = CourseDetailsDTO.class)
-        List<CourseDetailsDTO> courses,
+        @Schema(description = "The courses associated with the assessment.", implementation = CourseDetailsDto.class)
+        List<CourseDetailsDto> courses,
 
         @Schema(description = "The date and time the assessment was created.", example = "2021-01-01T12:00:00")
         String createdAt

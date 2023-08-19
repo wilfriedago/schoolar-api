@@ -1,6 +1,6 @@
-package dev.thewlabs.schoolar.domain.groups.validators;
+package dev.thewlabs.schoolar.domain.subjects.validators;
 
-import dev.thewlabs.schoolar.domain.groups.GroupRepository;
+import dev.thewlabs.schoolar.domain.subjects.SubjectRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,16 @@ import java.util.UUID;
 import static java.util.Objects.isNull;
 
 @Component
-public class GroupExistValidator implements ConstraintValidator<GroupExist, String> {
-    private final GroupRepository groupRepository;
+public class SubjectExistValidator implements ConstraintValidator<SubjectExist, String> {
+    private final SubjectRepository subjectRepository;
 
     @Autowired
-    public GroupExistValidator(GroupRepository groupRepository) {
-        this.groupRepository = groupRepository;
+    public SubjectExistValidator(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
     }
 
     @Override
-    public void initialize(GroupExist constraintAnnotation) {
+    public void initialize(SubjectExist constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -29,8 +29,8 @@ public class GroupExistValidator implements ConstraintValidator<GroupExist, Stri
         if (isNull(id)) return true;// Let other validators handle null value
 
         try {
-            UUID groupId = UUID.fromString(id);
-            return this.groupRepository.existsById(groupId);
+            UUID subjectId = UUID.fromString(id);
+            return subjectRepository.existsById(subjectId);
         } catch (IllegalArgumentException exception) {
             return true; // Let other validators handle uuid validation
         }

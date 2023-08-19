@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionDTO {
+public class SessionDto {
     UUID id;
 
     String title;

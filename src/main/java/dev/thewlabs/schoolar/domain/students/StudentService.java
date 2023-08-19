@@ -2,12 +2,12 @@ package dev.thewlabs.schoolar.domain.students;
 
 import dev.thewlabs.schoolar.common.iam.authentication.entities.Account;
 import dev.thewlabs.schoolar.common.iam.authentication.services.AuthService;
-import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import dev.thewlabs.schoolar.core.interfaces.CrudService;
 import dev.thewlabs.schoolar.domain.groups.Group;
 import dev.thewlabs.schoolar.domain.students.dtos.CreateStudentDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDetailsDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.UpdateStudentDTO;
+import dev.thewlabs.schoolar.shared.exceptions.NotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

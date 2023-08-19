@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Documented
-@Constraint(validatedBy = {ClassroomExistValidator.class})
+@Constraint(validatedBy = {ClassroomValidator.class})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ClassroomExist {
     String message() default "The classroom id provided is invalid.";
