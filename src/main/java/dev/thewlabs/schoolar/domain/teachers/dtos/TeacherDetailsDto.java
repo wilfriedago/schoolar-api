@@ -1,19 +1,25 @@
-package dev.thewlabs.schoolar.domain.admins.dtos;
+package dev.thewlabs.schoolar.domain.teachers.dtos;
 
+import dev.thewlabs.schoolar.domain.courses.dtos.CourseDto;
 import dev.thewlabs.schoolar.domain.users.enums.UserType;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Schema(name = "AdminDetailsDto", description = "Admin details data transfer object.")
-public final class AdminDetailsDTO extends AdminDTO {
-    @Schema(description = "Admin created at", example = "2021-01-01T00:00:00.000Z")
+@Schema(name = "TeacherDto", description = "Teacher data transfer object.")
+public final class TeacherDetailsDto extends TeacherDto {
+    @ArraySchema(schema = @Schema(description = "Teacher courses"), contains = @Schema(implementation = CourseDto.class))
+    List<CourseDto> courses;
+
+    @Schema(description = "Teacher created at", example = "2021-01-01T00:00:00.000Z")
     ZonedDateTime createdAt;
 
-    public AdminDetailsDTO(
+    public TeacherDetailsDto(
             UUID id,
             String firstName,
             String middleName,
@@ -23,6 +29,7 @@ public final class AdminDetailsDTO extends AdminDTO {
             String username,
             String avatarUrl,
             UserType type,
+            List<CourseDto> courses,
             ZonedDateTime createdAt
     ) {
         super(
@@ -37,6 +44,7 @@ public final class AdminDetailsDTO extends AdminDTO {
                 type
         );
 
+        this.courses = courses;
         this.createdAt = createdAt;
     }
 }

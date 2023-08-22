@@ -4,7 +4,7 @@ import dev.thewlabs.schoolar.domain.assessments.dtos.AssessmentDto;
 import dev.thewlabs.schoolar.domain.groups.dtos.GroupDTO;
 import dev.thewlabs.schoolar.domain.sessions.dtos.SessionDto;
 import dev.thewlabs.schoolar.domain.subjects.dtos.SubjectDto;
-import dev.thewlabs.schoolar.domain.teachers.dtos.TeacherDTO;
+import dev.thewlabs.schoolar.domain.teachers.dtos.TeacherDto;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -41,8 +41,8 @@ public class CourseDetailsDto {
     @ArraySchema(schema = @Schema(implementation = SessionDto.class))
     List<SessionDto> sessions;
 
-    @ArraySchema(contains = @Schema(implementation = TeacherDTO.class))
-    List<TeacherDTO> teachers;
+    @ArraySchema(contains = @Schema(implementation = TeacherDto.class))
+    List<TeacherDto> teachers;
 
     @ArraySchema(schema = @Schema(implementation = AssessmentDto.class))
     List<AssessmentDto> assessments;

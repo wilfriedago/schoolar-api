@@ -3,6 +3,7 @@ package dev.thewlabs.schoolar.domain.groups;
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
 import dev.thewlabs.schoolar.core.records.BulkActionResultDto;
 import dev.thewlabs.schoolar.domain.courses.dtos.CourseDetailsDto;
+import dev.thewlabs.schoolar.domain.events.dtos.EventDetailsDto;
 import dev.thewlabs.schoolar.domain.groups.dtos.CreateGroupDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.GroupDetailsDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.UpdateGroupDTO;
@@ -11,6 +12,7 @@ import dev.thewlabs.schoolar.domain.groups.dtos.courses.RemoveCoursesDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.students.AddStudentsDTO;
 import dev.thewlabs.schoolar.domain.groups.dtos.students.RemoveStudentsDTO;
 import dev.thewlabs.schoolar.domain.students.dtos.StudentDetailsDTO;
+import dev.thewlabs.schoolar.domain.timetables.services.TimetableService;
 import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +24,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,10 +33,12 @@ import java.util.UUID;
 @Tag(name = "Groups", description = "Groups endpoints")
 public class GroupController implements CrudController<GroupDetailsDTO, CreateGroupDTO, UpdateGroupDTO> {
     private final GroupService service;
+    private final TimetableService timetableService;
 
     @Autowired
-    public GroupController(GroupService service) {
+    public GroupController(GroupService service, TimetableService timetableService) {
         this.service = service;
+        this.timetableService = timetableService;
     }
 
     @GetMapping
@@ -143,5 +149,16 @@ public class GroupController implements CrudController<GroupDetailsDTO, CreateGr
         BulkActionResultDto result = this.service.removeCourses(id, dto);
 
         return HttpResponse.ok(result);
+    }
+
+    @GetMapping("/{id}/events")
+    public ResponseEntity<List<EventDetailsDto>> getGroupTimetableEvents(
+            @PathVariable UUID id,
+            @RequestParam LocalDate start,
+            @RequestParam LocalDate end
+    ) {
+        List<EventDetailsDto> events = timetableService.getGroupTimetableEvents(id, start, end);
+
+        return HttpResponse.ok(events);
     }
 }

@@ -3,7 +3,7 @@ package dev.thewlabs.schoolar.domain.events.dtos;
 import dev.thewlabs.schoolar.domain.classrooms.dtos.ClassroomDTO;
 import dev.thewlabs.schoolar.domain.events.enums.EventStatus;
 import dev.thewlabs.schoolar.domain.events.enums.EventType;
-import dev.thewlabs.schoolar.domain.users.dtos.UserDTO;
+import dev.thewlabs.schoolar.domain.users.dtos.UserDto;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -49,11 +49,11 @@ public class EventDetailsDto {
     @Schema(description = "The classroom where the event is taking place.", implementation = ClassroomDTO.class)
     ClassroomDTO classroom;
 
-    @Schema(description = "The organizer of the event.", implementation = UserDTO.class)
-    UserDTO organizer;
+    @Schema(description = "The organizer of the event.", implementation = UserDto.class)
+    UserDto organizer;
 
-    @ArraySchema(schema = @Schema(description = "List of all attendee of the events."), contains = @Schema(implementation = UserDTO.class))
-    List<UserDTO> attendees;
+    @ArraySchema(schema = @Schema(description = "List of all attendee of the events."), contains = @Schema(implementation = UserDto.class))
+    List<UserDto> attendees;
 
     @Schema(description = "The date and time the event was created. Cannot be null.", example = "2021-01-01T12:00:00")
     ZonedDateTime createdAt;

@@ -2,7 +2,7 @@ package dev.thewlabs.schoolar.domain.teachers;
 
 import dev.thewlabs.schoolar.core.interfaces.CrudController;
 import dev.thewlabs.schoolar.domain.teachers.dtos.CreateTeacherDTO;
-import dev.thewlabs.schoolar.domain.teachers.dtos.TeacherDetailsDTO;
+import dev.thewlabs.schoolar.domain.teachers.dtos.TeacherDetailsDto;
 import dev.thewlabs.schoolar.domain.teachers.dtos.UpdateTeacherDTO;
 import dev.thewlabs.schoolar.shared.http.HttpResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/teachers")
 @Tag(name = "Teachers", description = "Teachers endpoints")
-public class TeacherController implements CrudController<TeacherDetailsDTO, CreateTeacherDTO, UpdateTeacherDTO> {
+public class TeacherController implements CrudController<TeacherDetailsDto, CreateTeacherDTO, UpdateTeacherDTO> {
     private final TeacherService service;
 
     @Autowired
@@ -30,7 +30,7 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
     @Override
     @GetMapping
     @Operation(summary = "List all teachers")
-    public ResponseEntity<Page<TeacherDetailsDTO>> list(
+    public ResponseEntity<Page<TeacherDetailsDto>> list(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -38,7 +38,7 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
     ) {
         Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
 
-        Page<TeacherDetailsDTO> teachers = this.service.findAll(page, size, sort);
+        Page<TeacherDetailsDto> teachers = this.service.findAll(page, size, sort);
 
         return HttpResponse.ok(teachers);
     }
@@ -46,13 +46,13 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
     @Override
     @GetMapping("/{id}")
     @Operation(summary = "Show a teacher info")
-    public ResponseEntity<TeacherDetailsDTO> show(
+    public ResponseEntity<TeacherDetailsDto> show(
             @UUID
             @Validated
             @PathVariable
             java.util.UUID id
     ) {
-        TeacherDetailsDTO teacher = this.service.findById(id);
+        TeacherDetailsDto teacher = this.service.findById(id);
 
         return HttpResponse.ok(teacher);
     }
@@ -60,8 +60,8 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
     @Override
     @PostMapping
     @Operation(summary = "Create a new teacher")
-    public ResponseEntity<TeacherDetailsDTO> create(@RequestBody @Validated CreateTeacherDTO createDto) {
-        TeacherDetailsDTO teacher = this.service.create(createDto);
+    public ResponseEntity<TeacherDetailsDto> create(@RequestBody @Validated CreateTeacherDTO createDto) {
+        TeacherDetailsDto teacher = this.service.create(createDto);
 
         return HttpResponse.created(teacher);
     }
@@ -69,7 +69,7 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
     @Override
     @PutMapping("/{id}")
     @Operation(summary = "Update teacher data")
-    public ResponseEntity<TeacherDetailsDTO> update(
+    public ResponseEntity<TeacherDetailsDto> update(
             @UUID
             @Validated
             @PathVariable
@@ -79,7 +79,7 @@ public class TeacherController implements CrudController<TeacherDetailsDTO, Crea
             @Validated
             UpdateTeacherDTO updateDto
     ) {
-        TeacherDetailsDTO teacher = this.service.update(id, updateDto);
+        TeacherDetailsDto teacher = this.service.update(id, updateDto);
 
         return HttpResponse.ok(teacher);
     }

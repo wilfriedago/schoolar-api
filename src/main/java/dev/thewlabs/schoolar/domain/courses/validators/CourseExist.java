@@ -3,13 +3,12 @@ package dev.thewlabs.schoolar.domain.courses.validators;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
 
-@Documented
-@Constraint(validatedBy = {CourseValidator.class})
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = CourseValidator.class)
+@Documented
 public @interface CourseExist {
     String message() default "The course id provided is invalid.";
 

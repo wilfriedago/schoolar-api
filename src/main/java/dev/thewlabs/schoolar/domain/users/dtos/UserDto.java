@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "UserDto", description = "User data transfer dto")
-public class UserDTO {
+public class UserDto {
     @Schema(description = "User id", example = "9c4b1b9e-5b7a-4b1a-8b0a-5b9a4b1a8b0a")
     UUID id;
 

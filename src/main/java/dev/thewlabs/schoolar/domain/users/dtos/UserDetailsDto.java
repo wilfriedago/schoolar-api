@@ -16,8 +16,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "UserDetailsDTO", description = "User details data transfer object")
-public class UserDetailsDTO {
+@Schema(name = "UserDetailsDto", description = "User details data transfer object")
+public class UserDetailsDto {
     @Schema(description = "User id", example = "9c4b1b9e-5b7a-4b1a-8b0a-5b9a4b1a8b0a")
     UUID id;
 

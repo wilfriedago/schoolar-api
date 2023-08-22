@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,11 +44,9 @@ public class SessionService implements CrudService<SessionDetailsDto, CreateSess
     }
 
     @Override
+    @Transactional
     public SessionDetailsDto create(@NotNull CreateSessionDto dto) {
-        // @NotConflictingGroupEvent
-        // @NotConflictingClassroomEvent
         Session session = mapper.dtoToEntity(dto);
-
 
         List<User> attendees = session.getCourse().getAttendees();
 

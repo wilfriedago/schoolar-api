@@ -1,6 +1,6 @@
 server:
   address: ${APP_HOST:localhost}
-  port: ${APP_PORT:8080}
+  port: ${APP_PORT:8000}
   compression:
     enabled: true
   servlet:
@@ -62,7 +62,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: ${DB_SHOW_SQL:false}
+    show-sql: ${DB_SHOW_SQL:true}
     database: postgresql
     properties:
       hibernate:
@@ -106,7 +106,7 @@ swagger:
   contact-name: Wilfried AGO
   contact-mail: wilfriedago@pm.me
   contact-url: https://github.com/wilfriedago
-  dev-url: ${SWAGGER_DEV_URL:http://localhost:8080}
+  dev-url: ${SWAGGER_DEV_URL:http://localhost:8000}
   prod-url: ${SWAGGER_PROD_URL:https://schoolar.render.com}
   dev-description: ${SWAGGER_DEV_DESCRIPTION:Development server}
   prod-description: ${SWAGGER_DEV_DESCRIPTION:Production server}

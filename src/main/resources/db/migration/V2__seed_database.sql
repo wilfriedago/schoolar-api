@@ -1,3 +1,4 @@
+BEGIN;
 -- Inserting tuples for the 'groups' table
 INSERT INTO groups (created_at, deleted_at, updated_at, id, description, name)
 VALUES ('2023-08-11 08:00:00+00', NULL, '2023-08-11 08:00:00+00', 'a5c8a351-6a61-4b94-99a9-7351f4e6d8b1',
@@ -80,3 +81,81 @@ VALUES ('2023-08-10 08:00:00+00', NULL, '2023-08-10 08:00:00+00', 'e80b6521-25c9
         'History classroom with historical artifacts, suitable for 20 students', 20),
        ('2023-08-10 19:15:00+00', NULL, '2023-08-10 19:15:00+00', '8d52c3e1-5624-4a29-85d2-ae3ebdb31cd1', 'CL-302',
         'Chemistry classroom equipped with lab tables, fume hoods, and seating for 25 students', 25);
+
+-- Inserting tuples into the 'courses' table
+INSERT INTO courses (created_at, deleted_at, updated_at, id, description, hours, hours_done, hours_left, name, group_id,
+                     subject_id)
+VALUES ('2023-08-12 20:15:00+00', NULL, '2023-08-12 20:15:00+00', '3e2d3c4b-5eef-4a95-8dcd-5f1b2a2c37d1',
+        'Creative Writing for 11th Graders', 60, 0, 60, 'Creative Writing I', 'a5c8a351-6a61-4b94-99a9-7351f4e6d8b1',
+        'f216b8f9-6c0f-4586-80d3-9305c06ec9a5'),
+       ('2023-08-12 21:30:00+00', NULL, '2023-08-12 21:30:00+00', '3e2d3c4b-5eef-4a95-8dcd-5f1b2a2c37d2',
+        'Computer Graphics for 12th Graders', 60, 0, 60, 'Graphics I', 'e7f319d2-3d0e-42e3-99e9-4b1c25c60745',
+        '4a3ebc8d-53e6-4643-9d86-ea39f1d4cfcf'),
+       ('2023-08-12 22:45:00+00', NULL, '2023-08-12 22:45:00+00', '3e2d3c4b-5eef-4a95-8dcd-5f1b2a2c37d3',
+        'Physical Chemistry for 10th Graders', 60, 0, 60, 'Chemistry II', 'ba8f750b-1fa6-4f50-88e1-2e5b54fabb09',
+        'e0b69d94-e942-418b-af44-3a2f4c01ecdb'),
+       ('2023-08-12 23:00:00+00', NULL, '2023-08-12 23:00:00+00', '3e2d3c4b-5eef-4a95-8dcd-5f1b2a2c37d4',
+        'Advanced Algebra for 9th Graders', 60, 0, 60, 'Algebra II', 'd6b3fc9e-39b1-4317-8c7c-84e6c6b1a9c7',
+        '942ad7d6-370d-4026-befd-c2d4c7c4b5dd'),
+       ('2023-08-12 23:15:00+00', NULL, '2023-08-12 23:15:00+00', '3e2d3c4b-5eef-4a95-8dcd-5f1b2a2c37d5',
+        'Digital Art for 11th Graders', 60, 0, 60, 'Digital Art I', '8d592e95-8d62-43b1-a6b8-5c38b3dd45c2',
+        'c849ed7f-2056-446c-b13b-88d944b8e7a4');
+
+-- User 1 - Teacher
+-- Account
+INSERT INTO accounts (id, created_at, deleted_at, updated_at, avatar_url, email, email_verified, password, status)
+VALUES ('5e2e759b-39c4-4fd3-b131-509015506999', '2023-08-22 13:28:29.012102 +00:00', null, null,
+        'https://defaultavatar.url/', 'teacher1@example.com', false,
+        '$2a$10$MRQd4iu3ct/D8wIjuzLkJ.YDE09SLvaAgzslRkFT48PcEHiZK0Pxa', 'ACTIVE');
+
+-- User
+INSERT INTO users (dtype, id, created_at, deleted_at, updated_at, address, birth_date, firstname, gender, lastname,
+                   middlename, account_id)
+VALUES ('Teacher', '88b9cceb-5db9-4d5d-85e2-b53befa9ab9f', '2023-08-22 13:28:29.073851 +00:00', null, null, null, null,
+        'John', null, 'Doe', 'Smith', '5e2e759b-39c4-4fd3-b131-509015506999');
+
+-- User 2 - Student
+-- Account
+INSERT INTO accounts (id, created_at, deleted_at, updated_at, avatar_url, email, email_verified, password, status)
+VALUES ('5e2e759b-39c4-4fd3-b131-509015506915', '2023-08-22 13:28:29.012102 +00:00', null, null,
+        'https://defaultavatar.url/', 'student1@example.com', false,
+        '$2a$10$MRQd4iu3ct/D8wIjuzLkJ.YDE09SLvaAgzslRkFT48PcEHiZK0Pxa', 'ACTIVE');
+
+-- User
+INSERT INTO users (dtype, id, created_at, deleted_at, updated_at, address, birth_date, firstname, gender, lastname,
+                   middlename, account_id)
+VALUES ('Student', '88b9cceb-5db9-4d5d-85e2-b53befa9ab9d', '2023-08-22 13:28:29.073851 +00:00', null, null, null, null,
+        'Alice', null, 'Smith', 'Doe', '5e2e759b-39c4-4fd3-b131-509015506915');
+
+-- Assign Student1 to a group (Use a correct group_id)
+INSERT INTO group_students (student_id, group_id)
+VALUES ('88b9cceb-5db9-4d5d-85e2-b53befa9ab9d', 'a5c8a351-6a61-4b94-99a9-7351f4e6d8b1');
+
+-- User 3 - Admin
+-- Account
+INSERT INTO accounts (id, created_at, deleted_at, updated_at, avatar_url, email, email_verified, password, status)
+VALUES ('5e2e759b-39c4-4fd3-b131-509015506916', '2023-08-22 13:28:29.012102 +00:00', null, null,
+        'https://defaultavatar.url/', 'admin1@example.com', false,
+        '$2a$10$MRQd4iu3ct/D8wIjuzLkJ.YDE09SLvaAgzslRkFT48PcEHiZK0Pxa', 'ACTIVE');
+
+-- User
+INSERT INTO users (dtype, id, created_at, deleted_at, updated_at, address, birth_date, firstname, gender, lastname,
+                   middlename, account_id)
+VALUES ('Admin', '88b9cceb-5db9-4d5d-85e2-b53befa9ab9e', '2023-08-22 13:28:29.073851 +00:00', null, null, null, null,
+        'Eve', null, 'Smith', 'Doe', '5e2e759b-39c4-4fd3-b131-509015506916');
+
+-- User 4 - Teacher
+-- Account
+INSERT INTO accounts (id, created_at, deleted_at, updated_at, avatar_url, email, email_verified, password, status)
+VALUES ('5e2e759b-39c4-4fd3-b131-509015506917', '2023-08-22 13:28:29.012102 +00:00', null, null,
+        'https://defaultavatar.url/', 'teacher2@example.com', false,
+        '$2a$10$MRQd4iu3ct/D8wIjuzLkJ.YDE09SLvaAgzslRkFT48PcEHiZK0Pxa', 'ACTIVE');
+
+-- User
+INSERT INTO users (dtype, id, created_at, deleted_at, updated_at, address, birth_date, firstname, gender, lastname,
+                   middlename, account_id)
+VALUES ('Teacher', '88b9cceb-5db9-4d5d-85e2-b53befa9ab9c', '2023-08-22 13:28:29.073851 +00:00', null, null, null, null,
+        'Bob', null, 'Smith', 'Doe', '5e2e759b-39c4-4fd3-b131-509015506917');
+
+COMMIT;
+

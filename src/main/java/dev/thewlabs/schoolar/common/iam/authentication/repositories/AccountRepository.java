@@ -4,10 +4,12 @@ import dev.thewlabs.schoolar.common.iam.authentication.entities.Account;
 import dev.thewlabs.schoolar.shared.exceptions.EmailNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public interface AccountRepository extends JpaRepository<Account, UUID> {
     boolean existsByEmail(String email);
 

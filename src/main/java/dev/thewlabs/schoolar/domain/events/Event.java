@@ -30,21 +30,22 @@ public abstract class Event extends Traceable {
 
     private String url;
 
-    private Boolean allDay;
-
-    @Transient
-    private EventType type;
-
-    @OneToOne(optional = false)
-    @JoinColumn
-    private Timeslot timeslot;
+    @Column(nullable = false)
+    private Boolean allDay = false;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventStatus status = EventStatus.DRAFT;
 
-    @JoinColumn(name = "classroom_id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Transient
+    private EventType type;
+
+    @JoinColumn(name = "timeslot_id", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    private Timeslot timeslot;
+
+    @JoinColumn(name = "classroom_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Classroom classroom;
 
     @JoinColumn(name = "organizer_id")

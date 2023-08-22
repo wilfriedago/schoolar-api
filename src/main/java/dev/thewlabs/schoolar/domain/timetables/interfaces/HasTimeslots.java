@@ -7,5 +7,5 @@ import java.util.List;
 public interface HasTimeslots {
     List<Timeslot> getTimeslots();
 
-    Boolean isTimeslotBooked(Timeslot timeslot);
+    Boolean isTimeslotFree(Timeslot timeslot);
 }

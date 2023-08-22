@@ -2,8 +2,6 @@ package dev.thewlabs.schoolar.domain.timetables.entities;
 
 import dev.thewlabs.schoolar.domain.events.Event;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Check;
@@ -13,30 +11,34 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import static dev.thewlabs.schoolar.infra.constants.ApplicationConstants.EVENT_MAX_DURATION;
 import static dev.thewlabs.schoolar.infra.constants.ApplicationConstants.EVENT_MIN_DURATION;
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "timeslots")
+@Table(name = "timeslots", uniqueConstraints = @UniqueConstraint(name = "uk_timeslot", columnNames = {"start_time", "end_time", "classroom_timetable_id", "group_timetable_id"}))
 public class Timeslot {
     @Id
     @GeneratedValue
     private UUID id;
-    @Column(nullable = false)
-    @FutureOrPresent
+
+    @Column(nullable = false, name = "start_time")
     private ZonedDateTime startTime;
+
     @Check(name = "ck_end_time", constraints = "end_time > start_time")
-    @Column(nullable = false)
-    @Future
+    @Column(nullable = false, name = "end_time")
     private ZonedDateTime endTime;
+
     @OneToOne(mappedBy = "timeslot", optional = false)
     private Event event;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_timetable_id")
+
+    @JoinColumn(name = "group_timetable_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private GroupTimetable groupTimetable;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "classroom_timetable_id")
+
+    @JoinColumn(name = "classroom_timetable_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private ClassroomTimetable classroomTimetable;
 
     public Timeslot(ZonedDateTime startTime, ZonedDateTime endTime) {
@@ -56,19 +58,33 @@ public class Timeslot {
         return Objects.hash(getStartTime(), getEndTime());
     }
 
-    public Boolean isStartEqualsEnd() {
-        return startTime.equals(endTime);
+    public boolean isStartTimeFutureOrPresent() {
+        return startTime.isAfter(ZonedDateTime.now()) || startTime.equals(ZonedDateTime.now());
     }
 
-    public Boolean isEndBeforeStart() {
-        return endTime.isBefore(startTime);
+    public boolean isEndTimeFuture() {
+        return endTime.isAfter(ZonedDateTime.now());
     }
 
-    public Boolean isDurationValid() {
-        return Duration.between(startTime, endTime).compareTo(EVENT_MIN_DURATION) < 0;
+    public boolean isStartDifferentFromEnd() {
+        return !startTime.equals(endTime);
     }
 
-    public Boolean isValid() {
-        return !isStartEqualsEnd() && !isEndBeforeStart() && isDurationValid();
+    public boolean isStartBeforeEnd() {
+        return startTime.isBefore(endTime);
+    }
+
+    public boolean isStartAndEndSameDay() {
+        return startTime.toLocalDate().equals(endTime.toLocalDate());
+    }
+
+    public boolean isDurationTooShort() {
+        Duration eventDuration = Duration.between(startTime, endTime);
+        return eventDuration.compareTo(EVENT_MIN_DURATION) < 0;
+    }
+
+    public boolean isDurationTooLong() {
+        Duration eventDuration = Duration.between(startTime, endTime);
+        return eventDuration.compareTo(EVENT_MAX_DURATION) >= 0;
     }
 }

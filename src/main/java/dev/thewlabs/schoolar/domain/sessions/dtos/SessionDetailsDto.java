@@ -3,8 +3,7 @@ package dev.thewlabs.schoolar.domain.sessions.dtos;
 import dev.thewlabs.schoolar.domain.classrooms.dtos.ClassroomDTO;
 import dev.thewlabs.schoolar.domain.courses.dtos.CourseDto;
 import dev.thewlabs.schoolar.domain.events.enums.EventStatus;
-import dev.thewlabs.schoolar.domain.students.dtos.StudentDTO;
-import dev.thewlabs.schoolar.domain.users.dtos.UserDTO;
+import dev.thewlabs.schoolar.domain.users.dtos.UserDto;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -47,11 +46,11 @@ public class SessionDetailsDto {
     @Schema(description = "The classroom of the event.", implementation = ClassroomDTO.class)
     ClassroomDTO classroom;
 
-    @Schema(description = "The event organizer.", implementation = UserDTO.class)
-    UserDTO organizer;
+    @Schema(description = "The event organizer.", implementation = UserDto.class)
+    UserDto organizer;
 
-    @ArraySchema(schema = @Schema(description = "The list of attendees to the events"), contains = @Schema(implementation = UserDTO.class))
-    List<StudentDTO> attendees;
+    @ArraySchema(schema = @Schema(description = "The list of attendees to the events"), contains = @Schema(implementation = UserDto.class))
+    List<UserDto> attendees;
 
     @Schema(description = "The course associated with the session.", implementation = CourseDto.class)
     CourseDto course;

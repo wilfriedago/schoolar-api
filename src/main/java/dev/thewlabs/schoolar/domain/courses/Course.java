@@ -39,7 +39,6 @@ public class Course extends Traceable {
     @Check(name = "ck_hours_done", constraints = "hours >= hours_done")
     private Integer hoursDone;
 
-    @Check(name = "ck_hours_left", constraints = "hours_done >= hours_left")
     private Integer hoursLeft;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "course")
