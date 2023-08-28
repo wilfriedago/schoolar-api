@@ -22,8 +22,8 @@ public class Assessment extends Event {
     )
     private List<Course> courses;
 
-    @PostLoad
-    void updateType() {
-        setType(EventType.ASSESSMENT);
+    @Override
+    public EventType getType() {
+        return EventType.ASSESSMENT;
     }
 }

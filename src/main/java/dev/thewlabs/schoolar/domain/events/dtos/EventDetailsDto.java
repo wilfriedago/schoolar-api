@@ -35,10 +35,10 @@ public class EventDetailsDto {
     Boolean allDay;
 
     @Schema(description = "The start of the event.", example = "2023-08-09T15:30:45.123+02:00")
-    ZonedDateTime startTime;
+    ZonedDateTime start;
 
     @Schema(description = "The end of the event.", example = "2023-08-09T18:30:45.123+02:00")
-    ZonedDateTime endTime;
+    ZonedDateTime end;
 
     @Schema(description = "The type of the event.", example = "SESSION")
     EventType type;

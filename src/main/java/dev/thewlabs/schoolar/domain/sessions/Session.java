@@ -15,8 +15,8 @@ public class Session extends Event {
     @ManyToOne(fetch = FetchType.EAGER)
     private Course course;
 
-    @PostLoad
-    void updateType() {
-        setType(EventType.SESSION);
+    @Override
+    public EventType getType() {
+        return EventType.SESSION;
     }
 }

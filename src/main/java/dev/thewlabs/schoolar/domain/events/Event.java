@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,4 +60,19 @@ public abstract class Event extends Traceable {
     )
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> attendees;
+
+    public abstract EventType getType();
+
+    @PostLoad
+    void updateType() {
+        setType(getType());
+    }
+
+    public ZonedDateTime getStart() {
+        return timeslot.getStartTime();
+    }
+
+    public ZonedDateTime getEnd() {
+        return timeslot.getEndTime();
+    }
 }

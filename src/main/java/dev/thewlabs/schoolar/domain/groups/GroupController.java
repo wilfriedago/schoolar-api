@@ -25,7 +25,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @RestController
@@ -154,10 +156,11 @@ public class GroupController implements CrudController<GroupDetailsDTO, CreateGr
     @GetMapping("/{id}/events")
     public ResponseEntity<List<EventDetailsDto>> getGroupTimetableEvents(
             @PathVariable UUID id,
-            @RequestParam LocalDate start,
-            @RequestParam LocalDate end
+            @RequestParam LocalDateTime start,
+            @RequestParam LocalDateTime end,
+            @RequestParam TimeZone timeZone
     ) {
-        List<EventDetailsDto> events = timetableService.getGroupTimetableEvents(id, start, end);
+        List<EventDetailsDto> events = timetableService.getGroupTimetableEvents(id, start, end, timeZone);
 
         return HttpResponse.ok(events);
     }

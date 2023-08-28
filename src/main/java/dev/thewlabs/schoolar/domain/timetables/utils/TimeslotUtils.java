@@ -22,6 +22,7 @@ public class TimeslotUtils {
     private static boolean doTimeslotsOverlap(@NotNull Timeslot timeslot1, @NotNull Timeslot timeslot2) {
         LocalDateTime start1 = timeslot1.getStartTime().toLocalDateTime();
         LocalDateTime end1 = timeslot1.getEndTime().toLocalDateTime();
+
         LocalDateTime start2 = timeslot2.getStartTime().toLocalDateTime();
         LocalDateTime end2 = timeslot2.getEndTime().toLocalDateTime();
 

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
@@ -33,9 +35,9 @@ public class TimetableService {
         return groupTimetable.getEvents();
     }
 
-    public List<EventDetailsDto> getGroupTimetableEvents(UUID groupId, LocalDate startDate, LocalDate endDate) {
+    public List<EventDetailsDto> getGroupTimetableEvents(UUID groupId, LocalDateTime startDate, LocalDateTime endDate, TimeZone timeZone) {
         return groupTimetableRepository
-                .findGroupTimetableByGroupIdAndStartDateAndEndDate(groupId, startDate, endDate)
+                .findGroupTimetableByGroupIdAndStartDate(groupId, startDate.toLocalDate())
                 .map(groupTimetable -> groupTimetable.getEvents().stream()
                         .map(eventMapper::entityToDto)
                         .toList())

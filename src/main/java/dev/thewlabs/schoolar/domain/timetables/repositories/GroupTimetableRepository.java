@@ -16,6 +16,9 @@ public interface GroupTimetableRepository extends CrudRepository<GroupTimetable>
     @Query("SELECT gt FROM GroupTimetable gt JOIN gt.group g WHERE g.id = :groupId AND gt.startDate = :startDate AND gt.endDate = :endDate")
     Optional<GroupTimetable> findGroupTimetableByGroupIdAndStartDateAndEndDate(UUID groupId, LocalDate startDate, LocalDate endDate);
 
+    @Query("SELECT gt FROM GroupTimetable gt JOIN gt.group g WHERE g.id = :groupId AND gt.startDate = :startDate")
+    Optional<GroupTimetable> findGroupTimetableByGroupIdAndStartDate(UUID groupId, LocalDate startDate);
+
     default GroupTimetable findGroupTimetableById(UUID id) {
         return findById(id).orElseThrow(() -> new NotFoundException("Group timetable not found"));
     }
