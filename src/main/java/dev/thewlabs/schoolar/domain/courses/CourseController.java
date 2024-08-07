@@ -29,7 +29,7 @@ public class CourseController implements CrudController<CourseDetailsDTO, Create
     }
 
     @Override
-    @GetMapping
+    @GetMapping("/")
     @Operation(summary = "List all courses")
     public ResponseEntity<Page<CourseDetailsDTO>> list(
             @RequestParam(defaultValue = "0") int page,
